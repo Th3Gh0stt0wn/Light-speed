@@ -1,1 +1,33 @@
-g
+import pygame
+import random
+
+pygame.init()
+gamescreen = pygame.display.set_mode((900, 900))
+pygame.display.set_caption("PARTICLES")
+clock = pygame.time.Clock()
+
+xpos = 450
+ypos = 450
+xVel = random.randint(-2, 2)
+yVel = random.randint(-2, 2)
+
+while True:
+    clock.tick(60)
+    
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            break
+        
+    xpos += xVel
+    ypos += yVel
+    
+    if xpos < 0 or xpos > 900:
+        xVel *= -1
+    if ypos <0 or ypos > 900:
+        yVel *= -1
+        
+    gamescreen.fill((0, 0, 0))
+    pygame.draw.circle(gamescreen, (255, 255, 255), (xpos, ypos), 5)
+    pygame.display.flip()
+    
+pygame.quit()
