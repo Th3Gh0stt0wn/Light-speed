@@ -26,7 +26,7 @@ while True:
         if event.type == pygame.QUIT:
             break
         
-    for i in range(10):
+    for i in range(100):
         xpos[i] += xVel[i]
         ypos[i] += yVel[i]
         
