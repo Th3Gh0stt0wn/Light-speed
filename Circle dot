@@ -1,0 +1,60 @@
+import pygame
+import random
+import math
+
+pygame.init()
+gamescreen = pygame.display.set_mode((900, 900))
+pygame.display.set_caption("PARTICLES")
+clock = pygame.time.Clock()
+
+xpos = []
+ypos = []
+xVel = []
+yVel = []
+speed = 2
+
+for i in range(100):
+    xpos.append(450)
+    ypos.append(450)
+    xVel.append(random.randint(-2, 2))
+    yVel.append(random.randint(-2, 2))
+
+while True:
+    clock.tick(60)
+    
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            break
+        
+    for i in range(100):
+        xpos[i] += xVel[i]
+        ypos[i] += yVel[i]
+        
+        if xpos[i] < 0 or xpos[i] > 900:
+            xVel[i] *= -1
+        if ypos[i] <0 or ypos[i] > 900:
+            yVel[i] *= -1
+        
+    for i in range(100):
+        xpos.append(450)
+        ypos.append(450)
+    
+        velX = random.uniform(-1, 1)
+        velY = random.uniform(-1, 1)
+        
+        magnitude = math.sqrt(velX**2 + velY**2)
+        
+        if magnitude != 0:
+            xVel[i] = speed * velX / magnitude
+            yVel[i] = speed * velY / magnitude
+            
+        else:
+            xVel[i] = 0
+            yVel[i] = 0
+        
+    gamescreen.fill((0, 0, 0))
+    for i in range(100):
+        pygame.draw.circle(gamescreen, (255, 255, 255), (xpos[i], ypos[i]), 5)
+    pygame.display.flip()
+    
+pygame.quit()
